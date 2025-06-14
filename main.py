@@ -91,7 +91,7 @@ async def start(update, context):
     # Удаляем старую задачу, если есть
     remove_job_if_exists(str(chat_id), context)
     # Запускаем новую ежедневную задачу
-    time_to_send = datetime.time(hour=19, minute=20, tzinfo=moscow_tz)
+    time_to_send = datetime.time(hour=19, minute=30, tzinfo=moscow_tz)
     context.job_queue.run_daily(send_daily_color, time=time_to_send, chat_id=chat_id, name=str(chat_id))
     await update.message.reply_text("Начинаю отправлять пожелания")
 
@@ -99,7 +99,7 @@ async def start(update, context):
 async def restore_jobs(app):
     for chat_id, data in app.chat_data.items():
         if data.get('subscribed'):
-            time_to_send = datetime.time(hour=19, minute=20, tzinfo=moscow_tz)
+            time_to_send = datetime.time(hour=19, minute=30, tzinfo=moscow_tz)
             app.job_queue.run_daily(
                 send_daily_color,
                 time=time_to_send,
